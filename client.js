@@ -1,13 +1,37 @@
-var PORT = 4567;
-const HOST = '10.3.20.68';
-var dgram = require('dgram');
+'use strict'
 
-// const readline = require('readline');
+// includes and definitions
+const PORT = 4567
+const HOST = '127.0.0.1'
+const dgram = require('dgram')
+const readline = require('readline')
 
-// const rl = readline.createInterface({
-//   input  : process.stdin,
-//   output : process.stdout
-// });
+// configuration
+const rl = readline.createInterface({
+  input  : process.stdin,
+  output : process.stdout
+})
+
+const client = dgram.createSocket('udp4')
+client.bind(33333)
+
+client.on('listening', function ()
+{
+  client.setBroadcast(true)
+
+  const address = client.address()
+  console.log(`Socket open - ${address.address}:${address.port}`)
+  console.log('Type a message:')
+})
+
+rl.on('line', input =>
+{
+  client.send(input, 0, input.length, PORT, HOST, function (err, bytes)
+  {
+    if (err) throw err
+    console.log(`UDP message "${input}" sent to ${HOST}:${PORT}\n`)
+  })
+})
 
 // rl.question('What do you think of Node.js? ', (answer) =>
 // {
@@ -16,20 +40,3 @@ var dgram = require('dgram');
 
 //   rl.close();
 // });
-const messageString = 'Teste um dois tres\0';
-var message = Buffer.alloc(messageString.length, messageString);
-
-var client = dgram.createSocket('udp4');
-client.bind(33333);
-
-client.on('listening', function ()
-{
-  client.setBroadcast(true);
-
-  client.send(message, 0, message.length, PORT, HOST, function (err, bytes)
-  {
-    if (err) throw err;
-    console.log('UDP message sent to ' + HOST + ':' + PORT);
-    client.close();
-  });
-});

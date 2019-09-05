@@ -1,22 +1,21 @@
-var PORT = 4567;
-// var HOST = '127.0.0.1';
-const HOST = '10.3.20.98';
+var PORT = 4567
+var HOST = '127.0.0.1'
 
-var dgram = require('dgram');
+var dgram = require('dgram')
 
-var server = dgram.createSocket('udp4');
+var server = dgram.createSocket('udp4')
 
 server.on('listening', function ()
 {
-  server.setBroadcast(true);
+  server.setBroadcast(true)
 
-  var address = server.address();
-  console.log('UDP Server listening on ' + address.address + ':' + address.port);
-});
+  var address = server.address()
+  console.log('UDP Server listening on ' + address.address + ':' + address.port)
+})
 
 server.on('message', function (message, remote)
 {
-  console.log(remote.address + ':' + remote.port + ' - ' + message);
-});
+  console.log(remote.address + ':' + remote.port + ' - ' + message)
+})
 
-server.bind(PORT, HOST);
+server.bind(PORT, HOST)

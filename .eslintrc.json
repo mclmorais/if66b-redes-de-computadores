@@ -8,7 +8,7 @@
         "no-await-in-loop" : "error",
         "no-return-await" : "error",
         "require-await" : "error",
-        "semi": ["error", "always"],
+        "semi": ["error", "never"],
         "no-multi-spaces": "off",
         "key-spacing": ["error", {
             "singleLine": {
