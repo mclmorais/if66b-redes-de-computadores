@@ -1,8 +1,4 @@
 var PORT = 4567;
-// var HOST = '127.0.0.1';
-// const HOST = '10.181.31.255';
-// const HOST = '10.3.20.254';
-// const HOST = '10.181.21.225';
 const HOST = '10.3.20.68';
 var dgram = require('dgram');
 
