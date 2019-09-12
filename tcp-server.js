@@ -3,7 +3,7 @@
 const net = require('net')
 
 const HOST = 'localhost'
-const PORT = 1234
+const PORT = 4567
 
 const server = net.createServer(onClientConnected)
 
