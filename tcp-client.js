@@ -3,15 +3,16 @@
 const net = require('net')
 const readline = require('readline')
 
-var HOST = 'localhost'
-var PORT = 4567
+const args = process.argv.slice(2)
+const HOST = args[0]
+const PORT = 4567
 
 const rl = readline.createInterface({
   input  : process.stdin,
   output : process.stdout
 })
 
-var client = new net.Socket()
+const client = new net.Socket()
 
 client.connect(PORT, HOST, onClientConnected)
 
@@ -29,5 +30,5 @@ client.on('error', error => console.log(error))
 rl.on('line', input =>
 {
   console.log(`Enviando mensagem: ${input}`)
-  client.write(input)
+  client.write(`${input}\0`)
 })
